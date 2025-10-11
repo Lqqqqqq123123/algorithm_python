@@ -32,3 +32,4 @@ if __name__ == '__main__':
     temp = [0] * n
     arr = list(map(int, input().split()))
     print(merge_sort(arr, 0, n - 1))
+    
