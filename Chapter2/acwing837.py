@@ -1,41 +1,33 @@
 import sys
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(100000)
 
-input = sys.stdin.readline
-prt = sys.stdout.write
 
-N = int(1e5 + 10)
+# 定义并查集
+p, size = [], []
 
-p, cnt = [i for i in range(N)], [1] * N
 
-def find(x:int) -> int:
-    if p[x] != x:
+def find(x):
+    if x != p[x]:
         p[x] = find(p[x])
     return p[x]
 
 
-def merge(a:int, b:int):
-    A, B = find(a), find(b)
-    if A != B:
-        cnt[B] += cnt[A]
-        p[A] = B
-    
+def merge(x, y):
+    px, py = find(x), find(y)
+    if px == py:return 
+    size[py] += size[px]
+    p[px] = py
+
 
 n, m = map(int, input().split())
 
 for i in range(m):
     lines = input().split()
-
-    if lines[0] == "C":
-        a, b = map(int, lines[1:])
-        merge(a, b)
-    elif lines[0] == "Q1":
-        a, b = map(int, lines[1:])
-        A, B = find(a), find(b)
-        if A == B:
-            prt("Yes\n")
-        else:
-            prt("No\n")
-    else:
-        a = int(lines[1])
-        prt(str(cnt[find(a)]) + "\n")
+    if lines[0] == 'C':
+        merge(int(lines[1]), int(lines[2]))
+    elif lines[0] == 'Q1':
+        A = find(int(lines[1]))
+        B = find(int(lines[2]))
+        print('Yes' if A == B else 'No')
+    elif lines[0] == 'Q2':
+        print(size[find(int(lines[1]))])
