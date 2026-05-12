@@ -1,0 +1,17 @@
+# Definition for singly-linked list.
+from typing import List, Optional
+
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                while head != slow:
+                    head = head.next
+                    slow = slow.next
+
+                return  head
+
+        return None
