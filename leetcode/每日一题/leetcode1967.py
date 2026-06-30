@@ -6,8 +6,6 @@ class Solution:
         for s in patterns:
             if s in word:
                 res += 1
-
-
         return res
 
 
