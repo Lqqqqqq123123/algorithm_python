@@ -1,5 +1,2 @@
-from collections import defaultdict
-
-dic = defaultdict(set)
-
-print(1 in dic)
+s = '-123'
+print(int(s[:2]))
